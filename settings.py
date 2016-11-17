@@ -8,8 +8,15 @@ MONGO_PORT = 27017
 MONGO_USERNAME = ''
 MONGO_PASSWORD = ''
 MONGO_DBNAME = 'faeria-pandora-stats'
+
+#Allow serving on any domain and enable Cors
 SERVER_NAME = None
 X_DOMAINS = '*'
+
+#We dont care about version control, there is no writing to the api
+IF_MATCH = False
+VERSIONING = False
+
 
 # Enable reads only of resources
 RESOURCE_METHODS = ['GET']
