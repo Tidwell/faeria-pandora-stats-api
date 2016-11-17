@@ -17,7 +17,7 @@ Requires
 ##Install
 
 ```bash
-  $ git clone
+  $ git clone https://github.com/Tidwell/faeria-pandora-stats-api
   $ cd faeria-pandora-stats-api
   $ pip install eve
 ```
