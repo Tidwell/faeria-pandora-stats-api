@@ -2,8 +2,7 @@
 
 import os
 
-# We want to seamlessy run our API both locally and on Heroku. If running on
-# Heroku, sensible DB connection settings are stored in environment variables.
+# Configure flask and mongo connection
 MONGO_HOST = 'localhost'
 MONGO_PORT = 27017
 MONGO_USERNAME = ''
@@ -12,13 +11,10 @@ MONGO_DBNAME = 'faeria-pandora-stats'
 SERVER_NAME = None
 X_DOMAINS = '*'
 
-# Enable reads (GET), inserts (POST) and DELETE for resources/collections
-# (if you omit this line, the API will default to ['GET'] and provide
-# read-only access to the endpoint).
+# Enable reads only of resources
 RESOURCE_METHODS = ['GET']
 
-# Enable reads (GET), edits (PATCH) and deletes of individual items
-# (defaults to read-only item access).
+# Enable reads only of items
 ITEM_METHODS = ['GET']
 
 # We enable standard client cache directives for all resources exposed by the
@@ -26,24 +22,14 @@ ITEM_METHODS = ['GET']
 CACHE_CONTROL = 'max-age=20'
 CACHE_EXPIRES = 20
 
+# Override the default pagination, theres a lot of data to get at...
 PAGINATION_LIMIT = 500
 PAGINATION_DEFAULT = 100
 
-# Our API will expose two resources (MongoDB collections): 'people' and
-# 'works'. In order to allow for proper data validation, we define beaviour
-# and structure.
+# Expose the rating
 rating = {
     # 'title' tag used in item links.
     'item_title': 'rating',
-
-    # by default the standard item entry point is defined as
-    # '/people/<ObjectId>/'. We leave it untouched, and we also enable an
-    # additional read-only entry point. This way consumers can also perform GET
-    # requests at '/people/<lastname>/'.
-    'additional_lookup': {
-        'url': 'regex("[\w]+")',
-        'field': 'name'
-    },
 
     # Schema definition, based on Cerberus grammar. Check the Cerberus project
     # (https://github.com/nicolaiarocci/cerberus) for details.
